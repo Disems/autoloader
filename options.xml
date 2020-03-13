@@ -1,0 +1,16 @@
+
+<options>
+	<title>AutoUpdaterByDenseGhul(s)</title>
+	<uid>{4D7DD7B2-6D7ECE36-B8D09F63-2F2DCF10-1B65FC33}</uid>
+	<options>http://github.com/update/options.xml</options>
+	<news>http://github.com/</news>
+	<patchlist>http://github.com/update/patchlist.xml</patchlist>
+	<updater>http://github.com/update/AutoUpdater.exe</updater>
+	<full_check days="1">
+		<reload_patchlist/>
+	</full_check>
+	<run>
+		<program>hl2.exe</program>
+		<close_updater/>
+	</run>
+</options>
