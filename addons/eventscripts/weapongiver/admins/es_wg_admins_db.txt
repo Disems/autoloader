@@ -1,0 +1,16 @@
+"wg_admins"
+{
+  // Steam ID ADMIN
+	"STEAM_0:1:20877066"
+	{
+	  // Nom/Name Admin
+		"name"		"Veter"
+		// Droit
+		// 1 = peut configurer le script depuis le menu
+		// 0 = ne peut pas
+		// Rights
+		// 1 = Is allowed to configure the script by the menu
+		// 0 = Isn't allowed to
+		"droit"		"1"
+	}
+}

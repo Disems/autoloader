@@ -1,0 +1,338 @@
+ 
+"wg_languages"
+{  
+  // Msg when an admin joins
+  "connect"
+  {
+    // %1 = name of the admin who joined
+    "fr"  "#lightgreenAdmin: #green%1 #lightgreena rejoint le serveur"
+    "eng" "#lightgreenАдмин: #green%1 #lightgreen зашел на Сервер"
+  }
+  // Msg when an admin leaves
+  "disconnect"
+  {
+    // %1 = name of the admin who left
+    "fr"  "#lightgreenAdmin: #green%1 #lightgreena quittГ© le serveur"
+    "eng" "#lightgreenАдмин: #green%1 #lightgreen покинул Сервер"
+  }
+  // Msg when an admin gives a weapon (wg_anonymeadmin 1)
+  "giveweapon1"
+  {
+    // %1 = name of the player who received a weapon // %2 = name of the weapon
+    "fr"  "#lightgreenAdmin: #green%1 #lightgreena reГ§u un(e) #green%2"
+    "eng" "#lightgreenАдмин: #green%1 #lightgreen получил #green%2"
+  }
+  // Same, but wg_anonymeadmin 0
+  "giveweapon2"
+  {
+    // %1 = name of the player who received a weapon // %2 = name of the weapon // %3 = name of the admin who gave a weapon
+    "fr"  "#lightgreenAdmin: #green%1 #lightgreena reГ§u un(e) #green%2 #lightgreende #green%3"
+    "eng" "#lightgreenAdmin: #green%1 #lightgreen получил #green%2 #lightgreen от #green%3"
+  }
+  
+  ///////////////////////////////////
+  
+  "guns"
+  {
+    "fr"  "Pistolets"
+    "eng" "Пистолеты"
+  }
+  "shotguns"
+  {
+    "fr"  "Pompes"
+    "eng" "Дробовики"
+  }
+  "smg"
+  {
+    "fr"  "Fusils de soutien"
+    "eng" "Пулеметы"
+  }
+  "assault"
+  {
+    "fr"  "Fusils d'assault"
+    "eng" "Автоматы"
+  }
+  "sniper"
+  {
+    "fr"  "Fusils de prГ©cision"
+    "eng" "Снайперки"
+  }
+  "grenade"
+  {
+    "fr"  "Grenades"
+    "eng" "Гранаты"
+  }
+  "items"
+  {
+    "fr"  "Equipements"
+    "eng" "Элементы"
+  }
+  "settings"
+  {
+    "fr"  "RГ©glages"
+    "eng" "Настройки"
+  }
+  "exit"
+  {
+    "fr"  "Sortir"
+    "eng" "Выход"
+  }
+  "weapon_glock"
+  {
+    "fr"  "Glock"
+    "eng" "Glock"
+  }
+  "weapon_usp"
+  {
+    "fr"  "USP Tactical"
+    "eng" "USP Tactical"
+  }
+  "weapon_deagle"
+  {
+    "fr"  "Desert Eagle"
+    "eng" "Desert Eagle"
+  }
+  "weapon_p228"
+  {
+    "fr"  "Sauer P-228"
+    "eng" "Sauer P-228"  
+  }
+  "weapon_elite"
+  {
+    "fr"  "Dual Elite"
+    "eng" "Dual Elite"
+  }
+  "weapon_fiveseven"
+  {
+    "fr"  "FN Five-Seven"
+    "eng" "FN Five-Seven"
+  }
+  "weapon_m3"
+  {
+    "fr"  "M3"
+    "eng" "M3"
+  }
+  "weapon_xm1014"
+  {
+    "fr"  "XM1014"
+    "eng" "XM1014"
+  }
+  "weapon_mp5navy"
+  {
+    "fr"  "MP-5 Navy"
+    "eng" "MP-5 Navy"
+  }
+  "weapon_tmp"
+  {
+    "fr"  "Tactical Machine Pistol"
+    "eng" "Tactical Machine Pistol"
+  }
+  "weapon_p90"
+  {
+    "fr"  "P90"
+    "eng" "P90"
+  }
+  "weapon_mac10"
+  {
+    "fr"  "MAC-10"
+    "eng" "MAC-10"
+  }
+  "weapon_ump45"
+  {
+    "fr"  "UMP"
+    "eng" "UMP"
+  }
+  "weapon_ak47"
+  {
+    "fr"  "AK-47"
+    "eng" "AK-47"
+  }
+  "weapon_m4a1"
+  {
+    "fr"  "Colt M4A1"
+    "eng" "Colt M4A1"
+  }
+  "weapon_sg552"
+  {
+    "fr"  "Sauer SG-552"
+    "eng" "Sauer SG-552"
+  }
+  "weapon_aug"
+  {
+    "fr"  "Steyr AUG A1"
+    "eng" "Steyr AUG A1"
+  }
+  "weapon_galil"
+  {
+    "fr"  "Galil"
+    "eng" "Galil"
+  }
+  "weapon_famas"
+  {
+    "fr"  "Famas"
+    "eng" "Famas"
+  }
+  "weapon_scout"
+  {
+    "fr"  "Steyr Scout"
+    "eng" "Steyr Scout"
+  }
+  "weapon_awp"
+  {
+    "fr"  "AWP"
+    "eng" "AWP"
+  }
+  "weapon_g3sg1"
+  {
+    "fr"  "G3/SG1 Sniper Rifle"
+    "eng" "G3/SG1 Sniper Rifle"
+  }
+  "weapon_sg550"
+  {
+    "fr"  "SG 550"
+    "eng" "SG 550"
+  }
+  "weapon_m249"
+  {
+    "fr"  "M249 Machine Gun"
+    "eng" "M249 Machine Gun"
+  }
+  "weapon_hegrenade"
+  {
+    "fr"  "HE Grenade"
+    "eng" "Взрывная граната"
+  }
+  "weapon_flashbang"
+  {
+    "fr"  "FlashBang"
+    "eng" "Слеповая граната"
+  }
+  "weapon_smokegrenade"
+  {
+    "fr"  "FumigГЁnes"
+    "eng" "Дымовая граната"
+  }
+  "item_defuser"
+  {
+    "fr"  "Kit de dГ©samorГ§age"
+    "eng" "Инструменты для C4"
+  }
+  "item_c4"
+  {
+    "fr"  "Bombe C4"
+    "eng" "Бомба C4"
+  }
+  "item_vest"
+  {
+    "fr"  "Gilet pare-balles"
+    "eng" "Бронь"
+  }
+  "item_vesthelm"
+  {
+    "fr"  "Gilet pare-balles + Casque"
+    "eng" "Бронь + Шлем"
+  }
+  "item_nvgs"
+  {
+    "fr"  "Vision Nocturne"
+    "eng" "Ночное видение"
+  }
+  
+  // When a non-admin uses the command
+  "notallowed"
+  {
+    "fr"  "Vous n'ГЄtes pas autorisГ© Г  utiliser cette commande"
+    "eng" "Вы не можете использовать эту комманду!"
+  }
+  "addadmin"
+  {
+    "fr"  "Ajouter un admin"
+    "eng" "Добавить админа"
+  }
+  "rmvadmin"
+  {
+    "fr"  "Supprimer un admin"
+    "eng" "Удалить админа"
+  }
+  "modadmin"
+  {
+    "fr"  "GГ©rer les droits d'admins"
+    "eng" "Администрация"
+  }
+  "enablecomsg"
+  {
+    // To turn wg_comessage to 1/0
+    "fr"  "Messages de connection"
+    "eng" "Сообщение при коннекте"
+  }
+  "enablemsg"
+  {
+    // To turn wg_message to 1/0
+    "fr"  "Messages d'action"
+    "eng" "Сообщение при действии"
+  }
+  "comsgon"
+  {
+    // wg_comessage 1
+    "fr"  "Les messages de connection sont activГ©s"
+    "eng" "Сообщение при коннекте активировано"
+  }
+  "comsgoff"
+  {
+    // wg_comessage 0
+    "fr"  "Les messages de connection sont dГ©sactivГ©s"
+    "eng" "Сообщение при коннекте отключено"
+  }
+  "msgon"
+  {
+    // wg_message 1
+    "fr"  "Les messages d'action sont activГ©s"
+    "eng" "Сообщение при действии администратора активировано"
+  }
+  "msgoff"
+  {
+    // wg_message 0
+    "fr"  "Les messages d'action sont dГ©sactivГ©s"
+    "eng" "Сообщение при действии администратора отключено"
+  }
+  "adminadded"
+  {
+    // %1 = name of the admin who has been added
+    "fr"  "%1 a Г©tГ© ajoutГ© en tant qu'admin du script"
+    "eng" "%1 был добавлен, как администратор"
+  }
+  "adminremoved"
+  {
+    // %1 = name of the admin who has been removed
+    "fr"  "%1 a Г©tГ© supprimГ© en tant qu'admin du script"
+    "eng" "%1 был лишен админских полномочий"
+  }
+  "cantremove"
+  {
+    // Msg when you try to remove yourself of the admin list
+    "fr"  "Vous ne pouvez pas vous supprimer vous-meme"
+    "eng" "Вы не можете удалить самого себя"
+  }
+  "nowlvl"
+  {
+    // When you use the menu manage admins on someone
+    // %1 = name of the admin who has been chosen // %2 = level of the admin (value "droit" in the adminlist) 
+    "fr"  "%1 est maintenant admin niveau %2"
+    "eng" "%1 уровень администрации %2"
+  }
+  "noaliveplayer"
+  {
+    "fr"  "Il n'y a pas de joueur vivant sur le serveur"
+    "eng" "Нет живых игроков на Сервере"
+  }
+  "nononadmin"
+  {
+    "fr"  "Il n'y a pas de non-admin sur le serveur"
+    "eng" "Сейчас эта комманда недоступна"
+  }
+  "onlyoneadmin"
+  {
+    "fr"  "Vous ГЄtes l'unique admin du script"
+    "eng" "Вы единственный администратор на этом Сервере"
+  }
+}

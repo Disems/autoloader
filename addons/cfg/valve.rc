@@ -1,0 +1,132 @@
+// load the base configuration
+//exec default.cfg
+r_decal_cullsize 1
+
+// Setup custom controller
+exec joystick.cfg
+
+
+
+// run a user script file if present
+exec autoexec.cfg
+
+// Auto record demo alias
+alias demo1 "record demo1; alias demorecord demo2" 
+alias demo2 "stop; alias demorecord demo3" 
+alias demo3 "record demo2; alias demorecord demo4" 
+alias demo4 "stop; alias demorecord demo5" 
+alias demo5 "record demo3; alias demorecord demo6" 
+alias demo6 "stop; alias demorecord demo7" 
+alias demo7 "record demo4; alias demorecord demo8" 
+alias demo8 "stop; alias demorecord demo9" 
+alias demo9 "record demo5; alias demorecord demo10" 
+alias demo10 "stop; alias demorecord demo11"
+alias demo11 "record demo6; alias demorecord demo12" 
+alias demo12 "stop; alias demorecord demo13"
+alias demo13 "record demo7; alias demorecord demo14" 
+alias demo14 "stop; alias demorecord demo15"
+alias demo15 "record demo8; alias demorecord demo16" 
+alias demo16 "stop; alias demorecord demo17"
+alias demo17 "record demo9; alias demorecord demo18" 
+alias demo18 "stop; alias demorecord demo19"
+alias demo19 "record demo10; alias demorecord demo20" 
+alias demo20 "stop; alias demorecord demo21"
+alias demo21 "record demo11; alias demorecord demo22" 
+alias demo22 "stop; alias demorecord demo23"
+alias demo23 "record demo12; alias demorecord demo24" 
+alias demo24 "stop; alias demorecord demo25"
+alias demo25 "record demo13; alias demorecord demo26" 
+alias demo26 "stop; alias demorecord demo27"
+alias demo27 "record demo14; alias demorecord demo28" 
+alias demo28 "stop; alias demorecord demo29"
+alias demo29 "record demo15; alias demorecord demo30" 
+alias demo30 "stop; alias demorecord demo31"
+alias demo31 "record demo16; alias demorecord demo32" 
+alias demo32 "stop; alias demorecord demo33"
+alias demo33 "record demo17; alias demorecord demo34" 
+alias demo34 "stop; alias demorecord demo35"
+alias demo35 "record demo18; alias demorecord demo36" 
+alias demo36 "stop; alias demorecord demo37"
+alias demo37 "record demo19; alias demorecord demo38" 
+alias demo38 "stop; alias demorecord demo39"
+alias demo39 "record demo20; alias demorecord demo40" 
+alias demo40 "stop; alias demorecord demo41"
+alias demo41 "record demo21; alias demorecord demo42" 
+alias demo42 "stop; alias demorecord demo43"
+alias demo43 "record demo22; alias demorecord demo44" 
+alias demo44 "stop; alias demorecord demo45"
+alias demo45 "record demo23; alias demorecord demo46" 
+alias demo46 "stop; alias demorecord demo47"
+alias demo47 "record demo24; alias demorecord demo48" 
+alias demo48 "stop; alias demorecord demo49"
+alias demo49 "record demo25; alias demorecord demo50" 
+alias demo50 "stop; alias demorecord demo51"
+alias demo51 "record demo26; alias demorecord demo52" 
+alias demo52 "stop; alias demorecord demo53" 
+alias demo53 "record demo27; alias demorecord demo54" 
+alias demo54 "stop; alias demorecord demo55" 
+alias demo55 "record demo28; alias demorecord demo56" 
+alias demo56 "stop; alias demorecord demo57" 
+alias demo57 "record demo29; alias demorecord demo58" 
+alias demo58 "stop; alias demorecord demo59" 
+alias demo59 "record demo30; alias demorecord demo60" 
+alias demo60 "stop; alias demorecord demo61" 
+alias demo61 "record demo31; alias demorecord demo62" 
+alias demo62 "stop; alias demorecord demo63" 
+alias demo63 "record demo32; alias demorecord demo64" 
+alias demo64 "stop; alias demorecord demo65" 
+alias demo65 "record demo33; alias demorecord demo66" 
+alias demo66 "stop; alias demorecord demo67" 
+alias demo67 "record demo34; alias demorecord demo68" 
+alias demo68 "stop; alias demorecord demo69"
+alias demo69 "record demo35; alias demorecord demo70"
+alias demo70 "stop; alias demorecord demo71" 
+alias demo71 "record demo36; alias demorecord demo72" 
+alias demo72 "stop; alias demorecord demo73" 
+alias demo73 "record demo37; alias demorecord demo74" 
+alias demo74 "stop; alias demorecord demo75" 
+alias demo75 "record demo38; alias demorecord demo76" 
+alias demo76 "stop; alias demorecord demo77" 
+alias demo77 "record demo39; alias demorecord demo78" 
+alias demo78 "stop; alias demorecord demo79" 
+alias demo79 "record demo40; alias demorecord demo80" 
+alias demo80 "stop; alias demorecord demo81" 
+alias demo81 "record demo41; alias demorecord demo82" 
+alias demo82 "stop; alias demorecord demo83" 
+alias demo83 "record demo42; alias demorecord demo84" 
+alias demo84 "stop; alias demorecord demo85" 
+alias demo85 "record demo43; alias demorecord demo86" 
+alias demo86 "stop; alias demorecord demo87" 
+alias demo87 "record demo44; alias demorecord demo88" 
+alias demo88 "stop; alias demorecord demo89" 
+alias demo89 "record demo45; alias demorecord demo90" 
+alias demo90 "stop; alias demorecord demo91" 
+alias demo91 "record demo46; alias demorecord demo92" 
+alias demo92 "stop; alias demorecord demo93" 
+alias demo93 "record demo47; alias demorecord demo94" 
+alias demo94 "stop; alias demorecord demo95" 
+alias demo95 "record demo48; alias demorecord demo96" 
+alias demo96 "stop; alias demorecord demo97" 
+alias demo97 "record demo49; alias demorecord demo98" 
+alias demo98 "stop; alias demorecord demo99" 
+alias demo99 "record demo50; alias demorecord demo100" 
+alias demo100 "stop; alias demorecord demo1"  
+alias demorecord "demo1"
+
+// Cvars
+rate "30000"
+cl_updaterate "100"
+cl_cmdrate "100"
+cl_allowdownload "1"
+cl_allowupload "1"
+
+//
+// stuff command line statements
+//
+stuffcmds
+
+// Clear console
+clear
+
+// Print version
+version

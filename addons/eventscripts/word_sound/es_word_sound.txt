@@ -1,0 +1,63 @@
+     /////////////////////////////////////////////////////////
+    ///          Word_Sound v1.2 by A.R.T.E.M.        ///////
+   ////     Visit http://www.cs-sserver.ucoz.ru       //////
+  /////            -=Rus/SPB/server=-                 /////
+ //////        IP: russpbserver.no-ip.biz             ////
+/////////////////////////////////////////////////////////
+
+block load
+{
+        es_xsetinfo word_sound 1
+        es_makepublic word_sound
+        es_xmsg #multi #green[WordSound]#default loaded
+}
+
+block unload
+{
+        es_xsetinfo word_sound 0
+        es_xset #multi #green[WordSound]#default unloaded
+}
+
+//It is necessary, that sounds could be downloaded
+event es_map_start
+{
+        es downloadable sound/word_sound/lol.wav
+        es downloadable sound/word_sound/bye.wav
+        es downloadable sound/word_sound/hello.wav
+        es downloadable sound/word_sound/cool.wav
+        es downloadable sound/word_sound/fuckyou.mp3
+        es downloadable sound/word_sound/good.wav
+        es downloadable sound/word_sound/move.mp3
+        es downloadable sound/word_sound/ohmygod.mp3
+        es downloadable sound/word_sound/sorry.mp3
+        es downloadable sound/word_sound/start.mp3
+}
+
+//It shows the message in the beginning of the round
+event round_start
+{
+        if (server_var(word_sound) > 0) do
+        {
+              if (server_var(word_sound) > 0) then es_xmsg #multi #green[WordSound]#default Say "lol, bye, hi..." and will be played sound.
+        }
+}
+
+//It designates a word and a sound
+event player_say
+{
+        if (event_var(text) equalto "lol") then es_cexec_all play word_sound/lol.wav
+        if (event_var(text) equalto "bye") then es_cexec_all play word_sound/bye.wav
+        if (event_var(text) equalto "goodbye") then es_cexec_all play word_sound/bye.wav
+        if (event_var(text) equalto "hello") then es_cexec_all play word_sound/hello.wav
+        if (event_var(text) equalto "hi") then es_cexec_all play word_sound/hello.wav
+        if (event_var(text) equalto "cool") then es_cexec_all play word_sound/cool.wav
+        if (event_var(text) equalto "good") then es_cexec_all play word_sound/good.wav
+        if (event_var(text) equalto "fuck") then es_cexec_all play word_sound/fuckyou.mp3
+        if (event_var(text) equalto "fuck you") then es_cexec_all play word_sound/fuckyou.mp3
+        if (event_var(text) equalto "move") then es_cexec_all play word_sound/move.mp3
+        if (event_var(text) equalto "god") then es_cexec_all play word_sound/ohmygod.mp3
+        if (event_var(text) equalto "my god") then es_cexec_all play word_sound/ohmygod.mp3
+        if (event_var(text) equalto "sorry") then es_cexec_all play word_sound/sorry.mp3
+        if (event_var(text) equalto "sry") then es_cexec_all play word_sound/sorry.mp3
+        if (event_var(text) equalto "start") then es_cexec_all play word_sound/start.mp3
+}

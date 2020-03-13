@@ -1,0 +1,28 @@
+  //////////////////////////////////////
+  //    TO TRANSLATE THE SCRIPT
+  //    FOR ANOTHER LANGUAGE:
+  //    
+  //    Set the wg_language value to a prefixe (ex: esp)
+  //    Add a ligne with this prefixe (between "") following the example below
+  //    You have to do it for each msg, or the script WON'T WORK
+  //    Example: To add the Spanish, do like this for each words
+  //    "grenade"
+  //    {
+  //      "esp" "Granadas"
+  //    }
+  //    DO NOT REPLACE THE %1 or things like this, JUST REPLACE THE TEXT
+  //    #lightgreen, #green and #default are for coloured text
+  /////////////////////////////////////////
+  //    POUR TRADUIRE LE SCRIPT
+  //    
+  //    Régler la variable wg_language sur un prefixe choisis (ex: esp)
+  //    Ajouter une ligne avec ce prefixe (entre "") en suivant l'example ci dessous
+  //    Vous devez faire cette opération pour chaque message, ou le script NE MARCHERA PAS
+  //    Exemple: Pour ajouter l'espagnol, faite comme ci dessous pour chaque mot a traduire
+  //    "grenade"
+  //    {
+  //      "esp" "Granadas"
+  //    }
+  //    NE REMPLACEZ PAS LES %1 ou choses comme ca, REMPLACEZ UNIQUEMENT LE TEXTE
+  //    #lightgreen, #green et #default sont utilisés pour les textes colorés
+  /////////////////////////////////////////////

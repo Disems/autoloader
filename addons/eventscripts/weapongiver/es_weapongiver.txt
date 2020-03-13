@@ -1,0 +1,855 @@
+// WeaponGiver
+
+block load
+{
+  // Infos
+	es_xsetinfo wg_script_version "WeaponGiver V. 3.1"
+	es_msg #multi #green====[ #default server_var(wg_script_version) #green ]====
+	es_msg #multi #green====[ #default By XaM #green ]====
+	es_msg #multi #green[ #defaultWeaponGiver #green] => #defaultON
+	es_xmakepublic wg_script_version
+	
+	// Mise en place
+	es_load popup
+	es_load keymenu
+	
+	es_keygroupload wg_admins |weapongiver/admins
+	es_keygroupload wg_languages |weapongiver/language
+	
+  es_keygroupcreate wg_choice
+  
+  es_xsetinfo wg_menuline 0
+  es_xsetinfo wg_language 0
+  es_xsetinfo wg_msg 0
+  es_xsetinfo wg_msg2 0
+  es_xsetinfo wg_anonymeadmin 0
+  es_xsetinfo wg_adminname 0
+  es_xsetinfo wg_adminname2 0
+  es_xsetinfo wg_playername 0
+  es_xsetinfo wg_weaponname 0
+  es_xsetinfo wg_keyexists 0
+  es_xsetinfo wg_count 0
+  es_xsetinfo wg_key 0
+  es_xsetinfo wg_chatcmd 0
+  es_xsetinfo wg_concmd 0
+  es_xsetinfo wg_userid 0
+  es_xsetinfo wg_steamid 0
+  es_xsetinfo wg_existssteamid 0
+  es_xsetinfo wg_exists_menu 0
+  es_xsetinfo wg_playerselection 0
+  es_xsetinfo wg_droit 0
+  es_xsetinfo wg_renvoi 0
+  es_xsetinfo wg_playerchoice 0
+  es_xsetinfo wg_weaponchoice 0
+  es_xsetinfo wg_onoff 0
+  es_xsetinfo wg_comessage 0
+  es_xsetinfo wg_message 0.
+  es_xsetinfo wg_hasjustchanged 0
+  es_xsetinfo wg_activepopup 0
+  es_xsetinfo wg_popup 0
+  es_xsetinfo wg_alreadyadmin 0
+  es_xsetinfo wg_adminlist 0
+  es_xsetinfo wg_adminid 0
+  es_xsetinfo wg_newadminname 0
+  es_xsetinfo wg_adminselection 0
+  
+  //es_xdoblock weapongiver/config
+  es_mexec ../addons/eventscripts/weapongiver/cfg/config.cfg
+
+  //Crйation des commandes
+  es_regsaycmd server_var(wg_chatcmd) weapongiver/cmd "Commande chat ouvrant le menu"
+  es_regclientcmd server_var(wg_concmd) weapongiver/cmd "Commande console ouvrant le menu"
+  
+  // Crйation du menu principal
+  popup create wg_mainmenu
+  popup addline wg_mainmenu ">>>Админ Меню<<<"
+  popup addline wg_mainmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages guns server_var(wg_language)
+  popup addlinef wg_mainmenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages shotguns server_var(wg_language)
+  popup addlinef wg_mainmenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages smg server_var(wg_language)
+  popup addlinef wg_mainmenu "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages assault server_var(wg_language)
+  popup addlinef wg_mainmenu "->4. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages sniper server_var(wg_language)
+  popup addlinef wg_mainmenu "->5. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages grenade server_var(wg_language)
+  popup addlinef wg_mainmenu "->6. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages items server_var(wg_language)
+  popup addlinef wg_mainmenu "->7. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages settings server_var(wg_language)
+  popup addlinef wg_mainmenu "->8. %1" wg_menuline
+  popup addline wg_mainmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_mainmenu "0. %1" wg_menuline
+  popup submenu wg_mainmenu 1 wg_gunsmenu
+  popup submenu wg_mainmenu 2 wg_shotgunsmenu
+  popup submenu wg_mainmenu 3 wg_smgmenu
+  popup submenu wg_mainmenu 4 wg_assaultmenu
+  popup submenu wg_mainmenu 5 wg_snipermenu
+  popup submenu wg_mainmenu 6 wg_grenademenu
+  popup submenu wg_mainmenu 7 wg_itemsmenu
+  popup submenu wg_mainmenu 8 wg_settingsmenu
+  
+  // Crйation du menu principal 2
+  popup create wg_mainmenu2
+  popup addline wg_mainmenu2 ">>>Админ Меню<<<"
+  popup addline wg_mainmenu2 "-------------------------"
+  es_keygetvalue wg_menuline wg_languages guns server_var(wg_language)
+  popup addlinef wg_mainmenu2 "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages shotguns server_var(wg_language)
+  popup addlinef wg_mainmenu2 "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages smg server_var(wg_language)
+  popup addlinef wg_mainmenu2 "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages assault server_var(wg_language)
+  popup addlinef wg_mainmenu2 "->4. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages sniper server_var(wg_language)
+  popup addlinef wg_mainmenu2 "->5. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages grenade server_var(wg_language)
+  popup addlinef wg_mainmenu2 "->6. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages items server_var(wg_language)
+  popup addlinef wg_mainmenu2 "->7. %1" wg_menuline
+  popup addline wg_mainmenu2 "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_mainmenu2 "0. %1" wg_menuline
+  popup submenu wg_mainmenu2 1 wg_gunsmenu
+  popup submenu wg_mainmenu2 2 wg_shotgunsmenu
+  popup submenu wg_mainmenu2 3 wg_smgmenu
+  popup submenu wg_mainmenu2 4 wg_assaultmenu
+  popup submenu wg_mainmenu2 5 wg_snipermenu
+  popup submenu wg_mainmenu2 6 wg_grenademenu
+  popup submenu wg_mainmenu2 7 wg_itemsmenu
+  
+  // Crйation du sous-menu guns
+  popup create wg_gunsmenu
+  popup addline wg_gunsmenu ">>>Админ Меню<<<"
+  popup addline wg_gunsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages weapon_glock server_var(wg_language)
+  popup addlinef wg_gunsmenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_usp server_var(wg_language)
+  popup addlinef wg_gunsmenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_deagle server_var(wg_language)
+  popup addlinef wg_gunsmenu "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_p228 server_var(wg_language)
+  popup addlinef wg_gunsmenu "->4. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_fiveseven server_var(wg_language)
+  popup addlinef wg_gunsmenu "->5. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_elite server_var(wg_language)
+  popup addlinef wg_gunsmenu "->6. %1" wg_menuline
+  popup addline wg_gunsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_gunsmenu "0. %1" wg_menuline
+  popup menuselect wg_gunsmenu weapongiver/gunsmenu
+  
+  // Crйation du sous-menu shotguns
+  popup create wg_shotgunsmenu
+  popup addline wg_shotgunsmenu ">>>Админ Меню<<<"
+  popup addline wg_shotgunsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages weapon_m3 server_var(wg_language)
+  popup addlinef wg_shotgunsmenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_xm1014 server_var(wg_language)
+  popup addlinef wg_shotgunsmenu "->2. %1" wg_menuline
+  popup addline wg_shotgunsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_shotgunsmenu "0. %1" wg_menuline
+  popup menuselect wg_shotgunsmenu weapongiver/shotgunsmenu
+  
+  // Crйation du sous-menu smg
+  popup create wg_smgmenu
+  popup addline wg_smgmenu ">>>Админ Меню<<<"
+  popup addline wg_smgmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages weapon_mp5navy server_var(wg_language)
+  popup addlinef wg_smgmenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_p90 server_var(wg_language)
+  popup addlinef wg_smgmenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_tmp server_var(wg_language)
+  popup addlinef wg_smgmenu "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_ump45 server_var(wg_language)
+  popup addlinef wg_smgmenu "->4. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_mac10 server_var(wg_language)
+  popup addlinef wg_smgmenu "->5. %1" wg_menuline
+  popup addline wg_smgmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_smgmenu "0. %1" wg_menuline
+  popup menuselect wg_smgmenu weapongiver/smgmenu
+  
+  // Crйation du sous-menu assault
+  popup create wg_assaultmenu
+  popup addline wg_assaultmenu ">>>Админ Меню<<<"
+  popup addline wg_assaultmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages weapon_ak47 server_var(wg_language)
+  popup addlinef wg_assaultmenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_m4a1 server_var(wg_language)
+  popup addlinef wg_assaultmenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_sg552 server_var(wg_language)
+  popup addlinef wg_assaultmenu "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_aug server_var(wg_language)
+  popup addlinef wg_assaultmenu "->4. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_galil server_var(wg_language)
+  popup addlinef wg_assaultmenu "->5. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_famas server_var(wg_language)
+  popup addlinef wg_assaultmenu "->6. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_m249 server_var(wg_language)
+  popup addlinef wg_assaultmenu "->7. %1" wg_menuline
+  popup addline wg_assaultmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_assaultmenu "0. %1" wg_menuline
+  popup menuselect wg_assaultmenu weapongiver/assaultmenu
+  
+  // Crйation du sous-menu sniper
+  popup create wg_snipermenu
+  popup addline wg_snipermenu ">>>Админ Меню<<<"
+  popup addline wg_snipermenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages weapon_awp server_var(wg_language)
+  popup addlinef wg_snipermenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_scout server_var(wg_language)
+  popup addlinef wg_snipermenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_g3sg1 server_var(wg_language)
+  popup addlinef wg_snipermenu "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_sg550 server_var(wg_language)
+  popup addlinef wg_snipermenu "->4. %1" wg_menuline
+  popup addline wg_snipermenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_snipermenu "0. %1" wg_menuline
+  popup menuselect wg_snipermenu weapongiver/snipermenu
+  
+  // Crйation du sous-menu grenade
+  popup create wg_grenademenu
+  popup addline wg_grenademenu ">>>Админ Меню<<<"
+  popup addline wg_grenademenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages weapon_hegrenade server_var(wg_language)
+  popup addlinef wg_grenademenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_flashbang server_var(wg_language)
+  popup addlinef wg_grenademenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages weapon_smokegrenade server_var(wg_language)
+  popup addlinef wg_grenademenu "->3. %1" wg_menuline
+  popup addline wg_grenademenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_grenademenu "0. %1" wg_menuline
+  popup menuselect wg_grenademenu weapongiver/grenademenu
+  
+  // Crйation du sous-menu items
+  popup create wg_itemsmenu
+  popup addline wg_itemsmenu ">>>Админ Меню<<<"
+  popup addline wg_itemsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages item_defuser server_var(wg_language)
+  popup addlinef wg_itemsmenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages item_c4 server_var(wg_language)
+  popup addlinef wg_itemsmenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages item_vest server_var(wg_language)
+  popup addlinef wg_itemsmenu "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages item_vesthelm server_var(wg_language)
+  popup addlinef wg_itemsmenu "->4. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages item_nvgs server_var(wg_language)
+  popup addlinef wg_itemsmenu "->5. %1" wg_menuline
+  popup addline wg_itemsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_itemsmenu "0. %1" wg_menuline
+  popup menuselect wg_itemsmenu weapongiver/itemsmenu
+  
+  // Crйation du sous-menu settings
+  popup create wg_settingsmenu
+  popup addline wg_settingsmenu ">>>Админ Меню<<<"
+  popup addline wg_settingsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages addadmin server_var(wg_language)
+  popup addlinef wg_settingsmenu "->1. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages rmvadmin server_var(wg_language)
+  popup addlinef wg_settingsmenu "->2. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages modadmin server_var(wg_language)
+  popup addlinef wg_settingsmenu "->3. %1" wg_menuline
+  es_keygetvalue wg_menuline wg_languages enablecomsg server_var(wg_language)
+  if (server_var(wg_comessage) == 1) then es_xsetinfo wg_onoff "Вкл"
+  if (server_var(wg_comessage) == 0) then es_xsetinfo wg_onoff "Выкл"
+  popup addlinef wg_settingsmenu "->4. %1: %2" wg_menuline wg_onoff
+  es_keygetvalue wg_menuline wg_languages enablemsg server_var(wg_language)
+  if (server_var(wg_message) == 1) then es_xsetinfo wg_onoff "Вкл"
+  if (server_var(wg_message) == 0) then es_xsetinfo wg_onoff "Выкл"
+  popup addlinef wg_settingsmenu "->5. %1: %2" wg_menuline wg_onoff
+  popup addline wg_settingsmenu "-------------------------"
+  es_keygetvalue wg_menuline wg_languages exit server_var(wg_language)
+  popup addlinef wg_settingsmenu "0. %1" wg_menuline
+  popup menuselect wg_settingsmenu weapongiver/settingsmenu
+}
+
+event es_map_start
+{
+  es_xkeygroupdelete wg_choice
+  es_xkeygroupcreate wg_choice
+}
+
+block unload
+{
+  es_unregsaycmd server_var(wg_chatcmd)
+  es_unregclientcmd server_var(wg_concmd)
+  es_msg #multi #green[ #defaultWeaponGiver #green] => #defaultВЫКЛ
+  popup delete wg_mainmenu
+  popup delete wg_mainmenu2
+  popup delete wg_gunsmenu
+  popup delete wg_shotgunsmenu
+  popup delete wg_assaultmenu
+  popup delete wg_snipermenu
+  popup delete wg_settingsmenu
+  popup delete wg_itemsmenu
+  popup delete wg_grenademenu
+  es_xkeygroupdelete wg_admins
+  es_xkeygroupdelete wg_languages
+  es_xkeygroupdelete wg_choice
+  keymenu exists wg_exists_menu wg_playerlistmenu
+  if (server_var(wg_exists_menu) == 1) then keymenu delete wg_playerlistmenu
+  keymenu exists wg_exists_menu wg_addadminlistmenu
+  if (server_var(wg_exists_menu) == 1) then keymenu delete wg_addadminlistmenu
+  keymenu exists wg_exists_menu wg_modadminlistmenu
+  if (server_var(wg_exists_menu) == 1) then keymenu delete wg_modadminlistmenu
+  keymenu exists wg_exists_menu wg_rmvadminlistmenu
+  if (server_var(wg_exists_menu) == 1) then keymenu delete wg_rmvadminlistmenu
+}
+
+block cmd
+{
+  es_getcmduserid wg_userid
+  es_getplayersteamid wg_steamid server_var(wg_userid)
+  es_exists wg_existssteamid key wg_admins server_var(wg_steamid)
+  if (server_var(wg_existssteamid) == 1) do
+  {
+    es_exists wg_keyexists key wg_choice event_var(userid)
+    if (server_var(wg_keyexists) == 0) do
+    {
+      es_keycreate wg_choice server_var(wg_userid)
+    }
+    es_keygetvalue wg_droit wg_admins server_var(wg_steamid) droit
+    if (server_var(wg_droit) == 1) do
+    {
+      es popup send wg_mainmenu server_var(wg_userid)
+    }
+    else do
+    {
+      es popup send wg_mainmenu2 server_var(wg_userid)
+    }
+    es_xsetinfo wg_existssteamid 0
+    es_xsetinfo wg_steamid 0
+  }
+  else do
+  {
+    es_keygetvalue wg_msg wg_languages notallowed server_var(wg_language)
+    es_tell server_var(wg_userid) server_var(wg_msg)
+  }
+}
+
+event player_activate
+{
+  es_exists wg_existssteamid key wg_admins event_var(es_steamid)
+  if (server_var(wg_existssteamid) == 1) do
+  {
+    if (server_var(wg_comessage) == 1) do
+    {
+      es_keygetvalue wg_msg wg_languages connect server_var(wg_language)
+      es_format wg_msg2 server_var(wg_msg) event_var(es_username)
+      es_msg #multi #green[ #defaultWeaponGiver #green] server_var(wg_msg2)
+    }
+  }
+}
+
+event player_disconnect
+{
+  es_exists wg_existssteamid key wg_admins event_var(es_steamid)
+  if (server_var(wg_existssteamid) == 1) do
+  {
+    es_exists wg_keyexists key wg_choice event_var(userid)
+    if (server_var(wg_keyexists) == 1) do
+    {
+      es_keydelete wg_choice event_var(userid)
+    }
+    if (server_var(wg_comessage) == 1) do
+    {
+      es_keygetvalue wg_msg wg_languages disconnect server_var(wg_language)
+      es_format wg_msg2 server_var(wg_msg) event_var(es_username)
+      es_msg #multi #green[ #defaultWeaponGiver #green] server_var(wg_msg2)
+    }
+  }
+}
+
+block gunsmenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_glock
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_usp
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 3) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_deagle
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 4) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_p228
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 5) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_fiveseven
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 6) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_elite
+    es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block shotgunsmenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_m3
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_xm1014
+    es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block smgmenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_mp5navy
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_p90
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 3) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_tmp
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 4) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_ump45
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 5) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_mac10
+    es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block assaultmenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_ak47
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_m4a1
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 3) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_sg552
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 4) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_aug
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 5) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_galil
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 6) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_famas
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 7) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_m249
+    es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block snipermenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_awp
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_scout
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 3) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_g3sg1
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 4) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_sg550
+    es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block grenademenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_hegrenade
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_flashbang
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 3) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice weapon_smokegrenade
+    es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block itemsmenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice item_defuser
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice item_c4
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 3) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice item_vest
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 4) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice item_vesthelm
+    es_xdoblock weapongiver/wg_playerlist
+  }
+  if (server_var(_popup_choice) == 5) do
+  {
+    es_keysetvalue wg_choice server_var(_popup_userid) weaponchoice item_nvgs
+    es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block wg_playerlist
+{
+  es_xcreateplayerlist wg_playerlist
+  es_xkeygroupfilter wg_playerlist not teamid 0
+  es_xkeygroupfilter wg_playerlist not teamid 1
+  es_xkeygroupfilter wg_playerlist only isdead 0
+  es_xkeygroupfilter wg_playerlist only isbot 0
+  wg_count 0
+  es_xforeachkey wg_key in wg_playerlist "es_xmath wg_count + 1"
+  ifx true(wg_count) do
+  {
+    keymenu exists wg_exists_menu wg_playerlistmenu
+    if (server_var(wg_exists_menu) == 1) then keymenu delete wg_playerlistmenu
+    keymenu create wg_playerlistmenu wg_playerselection weapongiver/wg_giveweapon wg_playerlist #keyvalue name #key Выберите Игрока:
+    es keymenu send wg_playerlistmenu server_var(_popup_userid)
+    es_keygroupdelete wg_playerlist
+  }
+  es_xelse do
+  {
+    es_keygetvalue wg_msg wg_languages noaliveplayer server_var(wg_language)
+    es_tell server_var(_popup_userid) server_var(wg_msg)
+    es popup send server_var(_popup_name) server_var(_popup_userid)
+  }
+}
+
+block wg_giveweapon
+{
+  es_keysetvalue wg_choice server_var(_popup_userid) playerchoice server_var(wg_playerselection)
+  es_keygetvalue wg_playerchoice wg_choice server_var(_popup_userid) playerchoice
+  es_keygetvalue wg_weaponchoice wg_choice server_var(_popup_userid) weaponchoice
+  if (server_var(wg_weaponchoice) != "item_vest") do
+  {
+    if (server_var(wg_weaponchoice) != "item_vesthelm") do
+    {
+      es_give server_var(wg_playerchoice) server_var(wg_weaponchoice)
+    }
+  }
+  if (server_var(wg_weaponchoice) == "item_vesthelm") do
+  {
+    es_setplayerprop server_var(wg_playerchoice) CCSPlayer.m_bHasHelmet 1
+    es_setplayerprop server_var(wg_playerchoice) CCSPlayer.m_ArmorValue 100
+  }
+  if (server_var(wg_weaponchoice) == "item_vest") do
+  {
+    es_setplayerprop server_var(wg_playerchoice) CCSPlayer.m_ArmorValue 100
+  }
+  if (server_var(wg_message) == 1) do
+  {
+    if (server_var(wg_anonymeadmin) == 1) do
+    {
+      es_keygetvalue wg_msg wg_languages giveweapon1 server_var(wg_language)
+      es_keygetvalue wg_weaponname wg_languages server_var(wg_weaponchoice) server_var(wg_language)
+      es_getplayername wg_playername server_var(wg_playerchoice)
+      es_format wg_msg2 server_var(wg_msg) server_var(wg_playername) server_var(wg_weaponname)
+      es_msg #multi #green[ #defaultWeaponGiver #green] server_var(wg_msg2)
+    }
+    if (server_var(wg_anonymeadmin) == 0) do
+    {
+      es_keygetvalue wg_msg wg_languages giveweapon2 server_var(wg_language)
+      es_keygetvalue wg_weaponname wg_languages server_var(wg_weaponchoice) server_var(wg_language)
+      es_getplayername wg_playername server_var(wg_playerchoice)
+      es_getplayername wg_adminname server_var(_popup_userid)
+      es_format wg_msg2 server_var(wg_msg) server_var(wg_playername) server_var(wg_weaponname) server_var(wg_adminname)
+      es_msg #multi #green[ #defaultWeaponGiver #green] server_var(wg_msg2)
+    }
+  }
+  if (server_var(wg_renvoi) == 1) do
+  {
+    es_getplayersteamid wg_steamid server_var(_popup_userid)
+    es_keygetvalue wg_droit wg_admins server_var(wg_steamid) droit
+    if (server_var(wg_droit) == 1) then popup send wg_mainmenu server_var(_popup_userid)
+    if (server_var(wg_droit) == 0) then popup send wg_mainmenu2 server_var(_popup_userid)
+  }
+  else do
+  {
+    if (server_var(wg_renvoi) == 2) then es_xdoblock weapongiver/wg_playerlist
+  }
+}
+
+block settingsmenu
+{
+  if (server_var(_popup_choice) == 1) do
+  {
+    es_xdoblock weapongiver/addadminlist
+  }
+  if (server_var(_popup_choice) == 2) do
+  {
+    es_xdoblock weapongiver/rmvadminlist
+  }
+  if (server_var(_popup_choice) == 3) do
+  {
+    es_xdoblock weapongiver/modadminlist
+  }
+  if (server_var(_popup_choice) == 4) do
+  {
+    if (server_var(wg_comessage) == 1) do
+    {
+      wg_comessage 0
+      wg_onoff "Выкл"
+      wg_hasjustchanged 1
+      es_keygetvalue wg_msg wg_languages comsgoff server_var(wg_language)
+      es_keygetvalue wg_menuline wg_languages enablecomsg server_var(wg_language)
+      es_tell server_var(_popup_userid) server_var(wg_msg)
+      popup modlinef wg_settingsmenu 6 "->4. %1: %2" wg_menuline wg_onoff
+      es popup send wg_settingsmenu server_var(_popup_userid)
+    }
+    if (server_var(wg_hasjustchanged) == 0) do
+    {
+      if (server_var(wg_comessage) == 0) do
+      {
+        wg_comessage 1
+        wg_onoff "Вкл"
+        es_keygetvalue wg_msg wg_languages comsgon server_var(wg_language)
+        es_keygetvalue wg_menuline wg_languages enablecomsg server_var(wg_language)
+        es_tell server_var(_popup_userid) server_var(wg_msg)
+        popup modlinef wg_settingsmenu 6 "->4. %1: %2" wg_menuline wg_onoff
+        es popup send wg_settingsmenu server_var(_popup_userid)
+      }
+    }
+    wg_hasjustchanged 0
+  }
+  if (server_var(_popup_choice) == 5) do
+  {
+    if (server_var(wg_message) == 1) do
+    {
+      wg_message 0
+      wg_onoff "Выкл"
+      wg_hasjustchanged 1
+      es_keygetvalue wg_msg wg_languages msgoff server_var(wg_language)
+      es_keygetvalue wg_menuline wg_languages enablemsg server_var(wg_language)
+      es_tell server_var(_popup_userid) server_var(wg_msg)
+      popup modlinef wg_settingsmenu 7 "->5. %1: %2" wg_menuline wg_onoff
+      es popup send wg_settingsmenu server_var(_popup_userid)
+    }
+    if (server_var(wg_hasjustchanged) == 0) do
+    {
+      if (server_var(wg_message) == 0) do
+      {
+        wg_message 1
+        wg_onoff "Вкл"
+        es_keygetvalue wg_msg wg_languages msgon server_var(wg_language)
+        es_keygetvalue wg_menuline wg_languages enablemsg server_var(wg_language)
+        es_tell server_var(_popup_userid) server_var(wg_msg)
+        popup modlinef wg_settingsmenu 7 "->5. %1: %2" wg_menuline wg_onoff
+        es popup send wg_settingsmenu server_var(_popup_userid)
+      }
+    }
+    wg_hasjustchanged 0
+  }
+}
+
+block addadminlist
+{
+  es_keygroupcreate wg_adminlist
+  foreach player wg_adminlist #human "es_xdoblock weapongiver/addadminlisting"
+  wg_count 0
+  es_xforeachkey wg_key in wg_adminlist "es_xmath wg_count + 1"
+  ifx true(wg_count) do
+  {
+    keymenu exists wg_exists_menu wg_addadminlistmenu
+    if (server_var(wg_exists_menu) == 1) then keymenu delete wg_addadminlistmenu
+    keymenu create wg_addadminlistmenu wg_adminselection weapongiver/addadmin wg_adminlist #keyvalue name #key Выберите Игрока:
+    es keymenu send wg_addadminlistmenu server_var(_popup_userid)
+    es_keygroupdelete wg_adminlist
+  }
+  es_xelse do
+  {
+    es_keygetvalue wg_msg wg_languages nononadmin server_var(wg_language)
+    es_tell server_var(_popup_userid) server_var(wg_msg)
+    es popup send server_var(_popup_name) server_var(_popup_userid)
+  }
+}
+
+block rmvadminlist
+{
+  keymenu exists wg_exists_menu wg_rmvadminlistmenu
+  if (server_var(wg_exists_menu) == 1) then keymenu delete wg_rmvadminlistmenu
+  keymenu create wg_rmvadminlistmenu wg_adminselection weapongiver/rmvadmin wg_admins #keyvalue name #key Выберите Игрока:
+  es keymenu send wg_rmvadminlistmenu server_var(_popup_userid)
+}
+
+block rmvadmin
+{
+  es_getplayersteamid wg_adminid server_var(_popup_userid)
+  if (server_var(wg_adminselection) == server_var(wg_adminid)) do
+  {
+    es_keygetvalue wg_msg wg_languages cantremove server_var(wg_language)
+    es_tell server_var(_popup_userid) server_var(wg_msg)
+  }
+  else do
+  {
+    es_getuserid wg_userid server_var(wg_adminselection)
+    es popup active wg_activepopup wg_popup server_var(wg_userid)
+    if ("wg" in server_var(wg_activepopup))
+    {
+      es popup close server_var(wg_activepopup) server_var(wg_userid)
+    }
+    es_exists wg_keyexists key wg_choice server_var(wg_userid)
+    if (server_var(wg_keyexists) == 1) do
+    {
+      es_keydelete wg_choice server_var(wg_userid)
+    }
+    es_keygetvalue wg_adminname wg_admins server_var(wg_adminselection) name
+    es_keygetvalue wg_msg wg_languages adminremoved server_var(wg_language)
+    es_format wg_msg2 server_var(wg_msg) server_var(wg_adminname)
+    es_tell server_var(_popup_userid) server_var(wg_msg2)
+    es_keydelete wg_admins server_var(wg_adminselection)
+    es_keygroupsave wg_admins |weapongiver/admins
+  }
+  if (server_var(wg_renvoi) == 1) then popup send wg_mainmenu server_var(_popup_userid)
+  if (server_var(wg_renvoi) == 2) then es_xdoblock weapongiver/rmvadminlist
+}
+
+block addadminlisting
+{
+  es_getplayersteamid wg_adminid server_var(wg_adminlist)
+  es_exists wg_alreadyadmin key wg_admins server_var(wg_adminid)
+  if (server_var(wg_alreadyadmin) == 0) do
+  {
+    es_getplayername wg_newadminname server_var(wg_adminlist)
+    es_keycreate wg_adminlist server_var(wg_adminlist)
+    es_keysetvalue wg_adminlist server_var(wg_adminlist) name server_var(wg_newadminname)
+  }
+}
+
+block addadmin
+{
+  es_getplayersteamid wg_adminid server_var(wg_adminselection)
+  es_getplayername wg_newadminname server_var(wg_adminselection)
+  es_keycreate wg_admins server_var(wg_adminid)
+  es_keysetvalue wg_admins server_var(wg_adminid) name server_var(wg_newadminname)
+  es_keysetvalue wg_admins server_var(wg_adminid) droit 0
+  es_keygroupsave wg_admins |weapongiver/admins
+  es_keygetvalue wg_msg wg_languages adminadded server_var(wg_language)
+  es_format wg_msg2 server_var(wg_msg) server_var(wg_newadminname)
+  es_tell server_var(_popup_userid) server_var(wg_msg2)
+  es_keycreate wg_choice server_var(adminselection)
+  if (server_var(wg_renvoi) == 1) then popup send wg_mainmenu server_var(_popup_userid)
+  if (server_var(wg_renvoi) == 2) then es_xdoblock weapongiver/addadminlist
+}
+
+block modadminlist
+{
+  es_xkeygroupcreate wg_adminlist
+  es_foreachkey wg_adminlist in wg_admins "es_xdoblock weapongiver/modadminlisting"
+  keymenu exists wg_exists_menu wg_modadminlistmenu
+  if (server_var(wg_exists_menu) == 1) then keymenu delete wg_modadminlistmenu
+  wg_count 0
+  es_xforeachkey wg_key in wg_adminlist "es_xmath wg_count + 1"
+  ifx true(wg_count) do
+  {
+    keymenu create wg_modadminlistmenu wg_adminselection weapongiver/modadmin wg_adminlist #keyvalue name #key Выберите Игрока:
+    es keymenu send wg_modadminlistmenu server_var(_popup_userid)
+    es_keygroupdelete wg_adminlist
+  }
+  es_xelse do
+  {
+    es_keygetvalue wg_msg wg_languages onlyoneadmin server_var(wg_language)
+    es_tell server_var(_popup_userid) server_var(wg_msg)
+    es popup send server_var(_popup_name) server_var(_popup_userid)
+  }
+}
+
+block modadminlisting
+{
+  es_getplayersteamid wg_steamid server_var(_popup_userid)
+  if (server_var(wg_adminlist) != server_var(wg_steamid)) do
+  {
+    es_keycreate wg_adminlist server_var(wg_adminlist)
+    es_keygetvalue wg_adminname wg_admins server_var(wg_adminlist) name
+    es_keygetvalue wg_droit wg_admins server_var(wg_adminlist) droit
+    es_formatv wg_adminname2 "[%1] %2" wg_droit wg_adminname
+    es_keysetvalue wg_adminlist server_var(wg_adminlist) name server_var(wg_adminname2)
+  }
+}
+
+block modadmin
+{
+  es_keygetvalue wg_droit wg_admins server_var(wg_adminselection) droit
+  if (server_var(wg_droit) == 1) then es_keysetvalue wg_admins server_var(wg_adminselection) droit 0
+  if (server_var(wg_droit) == 0) then es_keysetvalue wg_admins server_var(wg_adminselection) droit 1
+  es_keygetvalue wg_droit wg_admins server_var(wg_adminselection) droit
+  es_keygroupsave wg_admins |weapongiver/admins
+  es_keygetvalue wg_msg wg_languages nowlvl server_var(wg_language)
+  es_getuserid wg_userid server_var(wg_adminselection)
+  es popup active wg_activepopup wg_popup server_var(wg_userid)
+  if ("wg" in server_var(wg_activepopup))
+  {
+    es popup close server_var(wg_activepopup) server_var(wg_userid)
+  }
+  es_getplayername wg_adminname server_var(wg_userid)
+  es_format wg_msg2 server_var(wg_msg) server_var(wg_adminname) server_var(wg_droit)
+  es_tell server_var(_popup_userid) server_var(wg_msg2)
+  if (server_var(wg_renvoi) == 1) then popup send wg_mainmenu server_var(_popup_userid)
+  if (server_var(wg_renvoi) == 2) then es_xdoblock weapongiver/modadminlist
+}
